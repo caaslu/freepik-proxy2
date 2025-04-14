@@ -33,7 +33,7 @@ app.post("/generate", async (req, res) => {
       },
       {
         headers: {
-          "x-freepik-api-key": FPSX0f20d073e5ee44fc867e965d6b33b2a2,
+          "x-freepik-api-key": apiKey,
           "Content-Type": "application/json",
           "User-Agent": "Mozilla/5.0"
         }
