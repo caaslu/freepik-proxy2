@@ -1,8 +1,12 @@
+const express = require("express");
 const axios = require("axios");
 
-export default async function handler(req, res) {
+const app = express();
+app.use(express.json());
+
+module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   const { prompt } = req.body;
@@ -34,14 +38,15 @@ export default async function handler(req, res) {
       {
         headers: {
           "Content-Type": "application/json",
-          "x-freepik-api-key": apiKey
+          "Accept": "application/json",
+          "X-Freepik-API-Key": apiKey
         }
       }
     );
 
     res.status(200).json(response.data);
   } catch (error) {
-    console.error("Erro ao gerar imagem:", error.message);
-    res.status(500).json({ error: "Erro ao gerar imagem" });
+    console.error("Erro na chamada da API:", error.response?.data || error.message);
+    res.status(500).json({ error: "Erro ao gerar imagem", details: error.message });
   }
-}
+};
