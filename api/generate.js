@@ -1,8 +1,4 @@
-const express = require("express");
 const axios = require("axios");
-
-const app = express();
-app.use(express.json());
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -38,7 +34,7 @@ module.exports = async (req, res) => {
       {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
           "X-Freepik-API-Key": apiKey
         }
       }
